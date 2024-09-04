@@ -1,27 +1,38 @@
 "use client";
+
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { fetchAudiences, AudienceResponse } from '../../services/recomend-audience';
 
-const AudienceCards: React.FC = () => {
+const Results: React.FC = () => {
+    const router = useRouter();
     const [audiences, setAudiences] = useState<AudienceResponse[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const getAudiences = async () => {
-            try {
-                const data = await fetchAudiences();
-                setAudiences(data.audiences);
-            } catch (error) {
-                setError('Failed to fetch audiences');
-                console.error('Error:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
+        // Ensure the router is fully initialized and the query is defined
+        if (!router.isReady) return;
 
-        getAudiences();
-    }, []);
+        const query = router.query.query as string;
+        if (query) {
+            const getAudiences = async () => {
+                try {
+                    const data = await fetchAudiences(query);
+                    setAudiences(data.audiences);
+                } catch (error) {
+                    setError('Failed to fetch audiences');
+                    console.error('Error:', error);
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            getAudiences();
+        } else {
+            setLoading(false);
+        }
+    }, [router.isReady, router.query]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -31,8 +42,13 @@ const AudienceCards: React.FC = () => {
         return <div>{error}</div>;
     }
 
+    if (!audiences.length) {
+        return <div>No results found for {router.query.query}.</div>;
+    }
+
     return (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', padding: '50px' }}>
+            <h2>Results for {router.query.query}:</h2>
             {audiences.map((audience) => (
                 <div key={audience.id} style={{ border: '1px solid #ccc', padding: '16px', borderRadius: '8px', width: '300px' }}>
                     <h3>{audience.name}</h3>
@@ -46,4 +62,4 @@ const AudienceCards: React.FC = () => {
     );
 };
 
-export default AudienceCards;
+export default Results;
