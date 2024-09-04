@@ -19,6 +19,7 @@ const Home: React.FC = () => {
           setAudiences(data.audiences);
       } catch (error) {
           setError('Failed to fetch audiences');
+          setAudiences([])
           console.error('Error:', error);
       } finally {
           setLoading(false);
