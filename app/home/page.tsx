@@ -7,7 +7,8 @@ import { fetchAudiences, AudienceResponse } from '../../services/recomend-audien
 
 const Home: React.FC = () => {
     const [searchText, setSearchText] = useState<string>('');
-    const [audiences, setAudiences] = useState<AudienceResponse[]>([]);
+    const [audiences, setAudiences] = useState<AudienceResponse[]>();
+    const [click, setClick] = useState<Number>(0);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     // const router =  useRouter();
@@ -28,7 +29,8 @@ const Home: React.FC = () => {
 
 
   const cards = () => {
-    if (loading) {
+
+    if (loading && !searchText) {
       return <div>Loading...</div>;
   }
 
@@ -36,14 +38,16 @@ const Home: React.FC = () => {
       return <div>{error}</div>;
   }
 
-  if (!audiences.length) {
+  if (!!audiences && !audiences.length && !searchText) {
       return <div>No results found for {searchText}.</div>;
   }
 
+  console.log(audiences)
+
   return (
+    <div><h2 style={{  padding: '50px' }}>Results for {searchText}:</h2>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', padding: '50px' }}>
-          <h2>Results for {searchText}:</h2>
-          {audiences.map((audience) => (
+          {!!audiences && audiences.map((audience) => (
               <div key={audience.id} style={{ border: '1px solid #ccc', padding: '16px', borderRadius: '8px', width: '300px' }}>
                   <h3>{audience.name}</h3>
                   <p>{audience.description}</p>
@@ -52,6 +56,7 @@ const Home: React.FC = () => {
                   <p><strong>Score:</strong> {audience.score}</p>
               </div>
           ))}
+      </div>
       </div>
   );
   }
@@ -84,9 +89,9 @@ const Home: React.FC = () => {
                 </button>
             </form>
 
-            <div style={{marginTop: "24px"}}>
+            {!!audiences && <div style={{marginTop: "24px"}}>
             {cards()}
-            </div>
+            </div>}
         </div>
     );
 };
