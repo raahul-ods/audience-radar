@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.truncate-multiline {
+  -webkit-line-clamp: 2; /* Fewer lines on smaller screens */
+}

@@ -1,28 +1,43 @@
-import React from 'react'
+import React from "react";
+import RightArrow from "../icons/rightArrow";
 
-const GetStartedCard = () => {
+const GetStartedCard: React.FC = () => {
   return (
-    <div className="w-[1232px] h-[318px] relative bg-[#55b271] rounded-[18px]">
-    <div className="h-[248px] left-[87px] top-[35px] absolute flex-col justify-start items-center gap-12 inline-flex">
-        <div className="self-stretch h-[156px] flex-col justify-start items-center gap-2 flex">
-            <div className="justify-start items-center gap-2 inline-flex">
-                <div className="text-center text-white text-[42px] font-bold font-['Inter'] leading-[52px]">Built with</div>
-                <div className="text-center text-white text-[40px] font-bold font-['Bricolage Grotesque'] uppercase leading-[52px]">🫶</div>
-                <div className="text-center text-white text-[42px] font-bold font-['Inter'] leading-[52px]">by Experts at GoAudience</div>
+    <div className="w-full  relative bg-[#55b271] rounded-xl">
+      <div className="flex flex-col justify-center items-center gap-2 p-2 md:p-6">
+        {/* Text Section */}
+        <div className="text-center flex flex-col justify-center items-center gap-4">
+          <div className="flex justify-center items-center gap-2">
+            <div className="text-white text-3xl font-bold font-inter leading-tight">
+              Built with
             </div>
-            <div className="w-[902px] text-center text-white text-xl font-normal font-['Inter'] leading-loose">GoAudience is an AI custom audience builder for meta ads with just one goal— providing enterprise grade targeting to those who don’t have access to it. Our platform help brands achieve profitable growth with benchmark-beating ROAS.</div>
-        </div>
-        <div className="flex-col justify-start items-center gap-[42px] flex">
-            <div className="px-3 py-2 bg-white rounded-md border border-white justify-center items-center gap-2 inline-flex">
-                <div className="px-0.5 justify-center items-center flex">
-                    <div className="text-[#55b271] text-xl font-semibold font-['Inter'] leading-7">Get Started</div>
-                </div>
-                <div className="w-6 h-6 px-1 py-1.5 justify-center items-center flex" />
+            <div className="text-white text-3xl font-bold font-bricolage uppercase leading-tight">
+              🫶
             </div>
+            <div className="text-white text-3xl font-bold font-inter leading-tight">
+              by Experts at GoAudience
+            </div>
+          </div>
+          <div className="text-center text-white text-lg font-normal font-inter leading-loose max-w-[90%] md:max-w-[70%]">
+            GoAudience is an AI custom audience builder for meta ads with just
+            one goal— providing enterprise-grade targeting to those who don’t
+            have access to it. Our platform helps brands achieve profitable
+            growth with benchmark-beating ROAS.
+          </div>
         </div>
-    </div>
-</div>
-  )
-}
 
-export default GetStartedCard
+        {/* Button Section */}
+        <div className="flex flex-col justify-center items-center gap-6 mt-6">
+          <button className="px-4 py-2 bg-white text-[#55b271] rounded-md border border-white text-lg font-semibold font-inter flex items-center gap-2">
+            <span className="text-xl">Get Started</span>
+            <div className="w-6 h-6">
+                <RightArrow color="#55b271"/>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default GetStartedCard;
