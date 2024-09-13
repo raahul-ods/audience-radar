@@ -7,7 +7,7 @@ const Header: React.FC = () => {
   return (
     <div className="w-full px-6 py-4 bg-white rounded-xl border border-[#f2f2f2] flex justify-between items-center">
       {/* Left Section */}
-      <Link href="http://localhost:3000/home">
+      <Link href="https://audience-radar.netlify.app/home">
         <div className="relative">
           <Image
             src="/images/AudienceRadarLogo.svg"

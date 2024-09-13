@@ -27,7 +27,7 @@ const SearchBar: React.FC<SearchBarProps> = ({searchQuery,setSearchQuery, cta}) 
   };
 
   return (
-    <div className=" w-full px-2 bg-white/80 rounded-xl backdrop-blur-[34px] flex items-center gap-[20px] shadow-md">
+    <div className="w-full h-[68px] px-2 bg-white/80 rounded-xl backdrop-blur-[34px] flex items-center gap-[20px] shadow-md">
 
       <div className="p-2 flex items-center gap-2 flex-grow">
         <div className="relative flex items-center justify-center">
@@ -38,7 +38,7 @@ const SearchBar: React.FC<SearchBarProps> = ({searchQuery,setSearchQuery, cta}) 
           value={searchQuery || ""}
           onChange={handleInputChange}
           placeholder="Paste your brand URL here"
-          className="text-black text-[16px] font-normal font-inter bg-transparent border-none outline-none w-full"
+          className="text-black text-[16px] h-[68px] font-normal font-inter bg-transparent border-none outline-none w-full"
         />
       </div>
 
